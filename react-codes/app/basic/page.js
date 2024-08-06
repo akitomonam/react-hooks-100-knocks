@@ -23,6 +23,9 @@ export default function Home() {
         setWeatherPlace(placeName)
       }
       )
+      .catch((error) => {
+        console.error("Error fetching weather data: ", error);
+      })
   }
 
   useEffect(getWeather, [])
