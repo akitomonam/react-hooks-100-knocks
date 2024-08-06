@@ -7,13 +7,20 @@ export default function Home() {
   const [fieldText, setFieldText] = useState("どんどん編集しちゃって！！");
   const [weatherPlace, setWeatherPlace] = useState("");
   const inputRef = useRef(null)
+  const prevCountRef = useRef();
 
   const handleCountUp = () => {
-    setCounterNum((prevCounterNum) => prevCounterNum + 1);
+    setCounterNum((prevCounterNum) => {
+      prevCountRef.current = counterNum
+      return prevCounterNum + 1
+    });
   };
 
   const handleCountDown = () => {
-    setCounterNum((prevCounterNum) => prevCounterNum - 1);
+    setCounterNum((prevCounterNum) => {
+      prevCountRef.current = counterNum
+      return prevCounterNum - 1
+    });
   };
 
   const getWeather = () => {
@@ -49,7 +56,8 @@ export default function Home() {
   return (
     <div>
       <div>基礎</div>
-      <div>カウンター：{counterNum}</div>
+      <div>カウンター(after)：{counterNum}</div>
+      <div>カウンター(before)：{prevCountRef.current}</div>
       <button type="button" onClick={handleCountUp}>
         up
       </button>
