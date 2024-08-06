@@ -84,40 +84,45 @@ export default function Home() {
 
   return (
     <div>
-      <div>基礎</div>
+      <h1>基礎</h1>
+      <h2>カウント(fast)</h2>
       <div>
         <div>カウンター(after)：{counterNum}</div>
         <div>カウンター(before)：{prevCountRef.current}</div>
         <div>カウンター(sample)：{sampleNum}</div>
+        <div>
+          <button type="button" onClick={handleCountUp}>
+            up
+          </button>
+          <button type="button" onClick={handleCountDown}>
+            down
+          </button>
+        </div>
       </div>
+      <h2>カウント(slow)</h2>
       <div>
         <div>カウンター2(after)：{counterNum2}</div>
         <div>カウンター2(double)：{doubleNum}</div>
+        <div>
+          <button type="button" onClick={handleCountUp2}>
+            up2
+          </button>
+          <button type="button" onClick={handleCountDown2}>
+            down2
+          </button>
+        </div>
       </div>
+      <h2>フォーム</h2>
       <div>
-        <button type="button" onClick={handleCountUp}>
-          up
-        </button>
-        <button type="button" onClick={handleCountDown}>
-          down
-        </button>
+        <input
+          type="text"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="自由に記述してください"
+          value={fieldText}
+          onChange={(e) => setFieldText(e.target.value)}
+        />
       </div>
-      <div>
-        <button type="button" onClick={handleCountUp2}>
-          up2
-        </button>
-        <button type="button" onClick={handleCountDown2}>
-          down2
-        </button>
-      </div>
-      <input
-        type="text"
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="自由に記述してください"
-        value={fieldText}
-        onChange={(e) => setFieldText(e.target.value)}
-      />
-      <input ref={inputRef} type="text" placeholder="自動でフォーカスが当たります" />
+      <div><input ref={inputRef} type="text" placeholder="自動でフォーカスが当たります" /></div>
       <h2>お天気情報</h2>
       <div>
         地名：{weatherPlace}
