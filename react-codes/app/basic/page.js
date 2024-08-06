@@ -28,7 +28,17 @@ export default function Home() {
       })
   }
 
-  useEffect(getWeather, [])
+  useEffect(() => {
+    getWeather();
+    const intervalId = setInterval(() => {
+      console.log('Interval running...');
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+      console.log("unmounted and interval cleared");
+    };
+  }, [])
 
   return (
     <div>
