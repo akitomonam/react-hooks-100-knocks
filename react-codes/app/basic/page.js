@@ -20,6 +20,7 @@ export default function Home() {
     axios.get(API_URL)
       .then((response) => {
         const placeName = response.data[0].publishingOffice
+        console.log("placeName:", placeName);
         setWeatherPlace(placeName)
       }
       )
