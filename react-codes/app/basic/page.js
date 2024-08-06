@@ -1,11 +1,12 @@
 "use client";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
   const [counterNum, setCounterNum] = useState(0);
   const [fieldText, setFieldText] = useState("どんどん編集しちゃって！！");
   const [weatherPlace, setWeatherPlace] = useState("");
+  const inputRef = useRef(null)
 
   const handleCountUp = () => {
     setCounterNum((prevCounterNum) => prevCounterNum + 1);
@@ -35,6 +36,10 @@ export default function Home() {
       console.log('Interval running...');
     }, 1000);
 
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+
     return () => {
       clearInterval(intervalId);
       console.log("unmounted and interval cleared");
@@ -58,6 +63,7 @@ export default function Home() {
         value={fieldText}
         onChange={(e) => setFieldText(e.target.value)}
       />
+      <input ref={inputRef} type="text" placeholder="自動でフォーカスが当たります" />
       <h2>お天気情報</h2>
       <div>
         地名：{weatherPlace}
