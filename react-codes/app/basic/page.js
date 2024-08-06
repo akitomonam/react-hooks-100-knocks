@@ -6,12 +6,16 @@ export default function Home() {
   const [counterNum, setCounterNum] = useState(0);
   const [fieldText, setFieldText] = useState("どんどん編集しちゃって！！");
   const [weatherPlace, setWeatherPlace] = useState("");
+
   const inputRef = useRef(null)
   const prevCountRef = useRef();
+
+  let sampleNum = 0
 
   const handleCountUp = () => {
     setCounterNum((prevCounterNum) => {
       prevCountRef.current = counterNum
+      sampleNum += 1
       return prevCounterNum + 1
     });
   };
@@ -19,6 +23,7 @@ export default function Home() {
   const handleCountDown = () => {
     setCounterNum((prevCounterNum) => {
       prevCountRef.current = counterNum
+      sampleNum -= 1
       return prevCounterNum - 1
     });
   };
@@ -29,7 +34,7 @@ export default function Home() {
       .then((response) => {
         const placeName = response.data[0].publishingOffice
         console.log("placeName:", placeName);
-        setWeatherPlace(placeName)
+        setWeatherPlace(placeName);
       }
       )
       .catch((error) => {
@@ -58,6 +63,7 @@ export default function Home() {
       <div>基礎</div>
       <div>カウンター(after)：{counterNum}</div>
       <div>カウンター(before)：{prevCountRef.current}</div>
+      <div>カウンター(sample)：{sampleNum}</div>
       <button type="button" onClick={handleCountUp}>
         up
       </button>
