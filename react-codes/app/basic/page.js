@@ -1,9 +1,10 @@
 "use client";
 import axios from "axios";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 
 export default function Home() {
   const [counterNum, setCounterNum] = useState(0);
+  const [counterNum2, setCounterNum2] = useState(0);
   const [fieldText, setFieldText] = useState("どんどん編集しちゃって！！");
   const [weatherPlace, setWeatherPlace] = useState("");
 
@@ -11,6 +12,14 @@ export default function Home() {
   const prevCountRef = useRef();
 
   let sampleNum = 0
+
+  const double = (num) => {
+    let i = 0;
+    while (i < 1000000000) {
+      i++;
+    }
+    return num * 2;
+  }
 
   const handleCountUp = () => {
     setCounterNum((prevCounterNum) => {
@@ -28,6 +37,18 @@ export default function Home() {
     });
   };
 
+  const handleCountUp2 = () => {
+    setCounterNum2((prevCounterNum) => {
+      return prevCounterNum + 1
+    });
+  };
+
+  const handleCountDown2 = () => {
+    setCounterNum2((prevCounterNum) => {
+      return prevCounterNum - 1
+    });
+  };
+
   const getWeather = () => {
     const API_URL = "https://www.jma.go.jp/bosai/forecast/data/forecast/340000.json"
     axios.get(API_URL)
@@ -41,6 +62,9 @@ export default function Home() {
         console.error("Error fetching weather data: ", error);
       })
   }
+
+  // const doubleNum = double(counterNum);
+  const doubleNum = useMemo(() => double(counterNum2), [counterNum2])
 
   useEffect(() => {
     getWeather();
@@ -61,15 +85,31 @@ export default function Home() {
   return (
     <div>
       <div>基礎</div>
-      <div>カウンター(after)：{counterNum}</div>
-      <div>カウンター(before)：{prevCountRef.current}</div>
-      <div>カウンター(sample)：{sampleNum}</div>
-      <button type="button" onClick={handleCountUp}>
-        up
-      </button>
-      <button type="button" onClick={handleCountDown}>
-        down
-      </button>
+      <div>
+        <div>カウンター(after)：{counterNum}</div>
+        <div>カウンター(before)：{prevCountRef.current}</div>
+        <div>カウンター(sample)：{sampleNum}</div>
+      </div>
+      <div>
+        <div>カウンター2(after)：{counterNum2}</div>
+        <div>カウンター2(double)：{doubleNum}</div>
+      </div>
+      <div>
+        <button type="button" onClick={handleCountUp}>
+          up
+        </button>
+        <button type="button" onClick={handleCountDown}>
+          down
+        </button>
+      </div>
+      <div>
+        <button type="button" onClick={handleCountUp2}>
+          up2
+        </button>
+        <button type="button" onClick={handleCountDown2}>
+          down2
+        </button>
+      </div>
       <input
         type="text"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
