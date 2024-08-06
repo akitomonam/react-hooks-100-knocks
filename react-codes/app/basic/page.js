@@ -1,9 +1,11 @@
 "use client";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [counterNum, setCounterNum] = useState(0);
   const [fieldText, setFieldText] = useState("どんどん編集しちゃって！！");
+  const [weatherPlace, setWeatherPlace] = useState("");
 
   const handleCountUp = () => {
     setCounterNum((prevCounterNum) => prevCounterNum + 1);
@@ -12,6 +14,18 @@ export default function Home() {
   const handleCountDown = () => {
     setCounterNum((prevCounterNum) => prevCounterNum - 1);
   };
+
+  const getWeather = () => {
+    const API_URL = "https://www.jma.go.jp/bosai/forecast/data/forecast/340000.json"
+    axios.get(API_URL)
+      .then((response) => {
+        const placeName = response.data[0].publishingOffice
+        setWeatherPlace(placeName)
+      }
+      )
+  }
+
+  useEffect(getWeather, [])
 
   return (
     <div>
@@ -30,6 +44,10 @@ export default function Home() {
         value={fieldText}
         onChange={(e) => setFieldText(e.target.value)}
       />
+      <h2>お天気情報</h2>
+      <div>
+        地名：{weatherPlace}
+      </div>
     </div>
   );
 }
