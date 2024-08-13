@@ -1,6 +1,12 @@
 "use client";
 import axios from "axios";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+
+const SubHome = ({ onButtonClick }) => {
+  return (
+    <button onClick={onButtonClick}> Click me</button>
+  )
+}
 
 export default function Home() {
   const [counterNum, setCounterNum] = useState(0);
@@ -20,6 +26,10 @@ export default function Home() {
     }
     return num * 2;
   }
+
+  const handleClick = useCallback(() => {
+    console.log("Button clicked")
+  }, []);
 
   const handleCountUp = () => {
     setCounterNum((prevCounterNum) => {
@@ -85,6 +95,8 @@ export default function Home() {
   return (
     <div>
       <h1>基礎</h1>
+      <h2>useCallBackのクリック</h2>
+      <SubHome onButtonClick={handleClick} />
       <h2>カウント(fast)</h2>
       <div>
         <div>カウンター(after)：{counterNum}</div>

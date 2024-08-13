@@ -16,7 +16,7 @@ React Hooksを練習するための100本ノックは、様々な状況やシナ
 7. [`useRef`を使ってDOM要素にアクセスする。](./MEMO/7.md)😀
 8. [`useRef`を使って以前の状態を保持する。](./MEMO/8.md)😀
 9. [`useMemo`を使って高価な計算結果をメモ化する。](./MEMO/9.md)😀
-10. `useCallback`を使って関数をメモ化する。
+10. [`useCallback`を使って関数をメモ化する。](./MEMO/10.md)😀
 
 ### 応用
 11. `useState`と`useEffect`を組み合わせて、入力フォームの値が変わるたびにAPIを呼び出す。
